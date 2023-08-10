@@ -97,7 +97,9 @@ Although it is clear (and also easily verified by some simple experiments) that 
 
 For this test case we used the [Fbr45-21-5](https://networkrepository.com/frb45-21-5.php) graph, which contains 945 nodes and 387.461 edges, and we ran our algorithms with DOULION for different values of the parameter $p$ (named 'Doulion Percentage' in the plots below).
 
-![BruteForceMagic](./result_plots/BruteForceMagic.PNG)
+<p align="center">
+    <img src="./result_plots/BruteForceMagic.PNG" alt="BruteForceMagic"/>
+</p>
 
 As we can see, for a small percentage of the graph, Node Iterator and Compact Forward achieve
 better time performance compared to Brute Force. As the number of edges we keep increases, so does the execution time for all our algorithms, but, when we go beyond keeping more than 40% of the graph, we see that both Node Iterator's and Compact Forward's execution times blow up, while Brute Force's remains low!
@@ -108,7 +110,9 @@ On the right graph, we can see the number of triangles found by DOULION + Brute 
 
 In the following plot, we can see the accuracy of TRIEST-Base for a number of different graphs. On the y axis we have calculated the relative percentage error for the number of triangles in each graph.
 
-![TriestBase1](./result_plots/triest/triest-reErVSReservoir.PNG)
+<p align="center">
+    <img src="./result_plots/triest/triest-reErVSReservoir.PNG" alt="TriestBase1"/>
+</p>
 
 
 As we expected, for small samples we have large errors, and these errors decrease for all graphs as the sample size increses. One interesting note here is that for some graphs, even if we keep 100% of the graph, we still seem to get a relative error in the neighbourhood of 20%. Due to the nature of the algorithm, the order of the incoming edges from the stream, affects the number of triangles found. Therefore, to get an even more accurate result, we could have tried running a number of experiments for each graph, but shuffling the edges in the stream each time. We suspect this is the reason why we don't see 0 error when keeping the entire graph.
