@@ -1,5 +1,21 @@
 # Triangle Counting in Undirected Graphs
 
+In this project, we implement, test and compare various triangle counting algorithms for graphs having different properties.
+
+## Contents
+- [Motivation](#motivation)
+- [Summary](#summary)
+- [Algorithm Descriptions](#algorithm-descriptions)
+    - [Brute Force](#brute-force)
+    - [Node Iterator](#node-iterator)
+    - [Compact Forward](#compact-forward)
+    - [DOULION](#doulion)
+    - [TRIEST-Base](#triest-base)
+- [Key Findings](#key-findings)
+    - [Brute Force magic](#brute-force-magic)
+    - [TRIEST-Base performance](#triest-base-performance)
+
+
 ## Motivation
 
 In the world of business and decision-making, understanding the underlying patterns and dynamics of networks is becoming increasingly crucial. That's where triangle counting comes into play! 
@@ -25,11 +41,11 @@ For our experiments, graphs of various sizes and with varying properties were us
 
 This project was completed within the scope of the 'Managing and Mining Complex Networks' course of the 'Data and Web Science' MSc programme of Aristotle University of Thessaloniki (AUTH) for the winter semester of 2022.
 
-# Algorithm Descriptions
+## Algorithm Descriptions
 
 In the following, we consider an undirected graph $\mathcal{G} = G(V, E)$, where $|V| = n$ is the number of nodes in the graph, and $|E| = m$ the number of edges in the graph.
 
-## Brute Force
+### Brute Force
 
 A simple algorithm which checks eall triplets of nodes $u,v,w$. If all edges between each triplet apper in the graph, then a triangle has been detected.
 
@@ -37,7 +53,7 @@ A simple algorithm which checks eall triplets of nodes $u,v,w$. If all edges bet
 
 * *Issue:* Extremely expensive for large graphs (i.e. large $n$).
 
-## Node Iterator
+### Node Iterator
 
 In this algorithm, for every node of $\mathcal{G}$, we check if it forms any triangles with its neighbors. Let $v$ be a node to check. Take all possible pairs of nodes $u, w$ (both neighbours of $v$) and check if they are connected by an edge. If yes, then a triangle has been detected.
 
@@ -46,7 +62,7 @@ In this algorithm, for every node of $\mathcal{G}$, we check if it forms any tri
 * *Issue:* Extremely expensive for graphs with very large maximal degree.
 
 
-## Compact Forward
+### Compact Forward
 
 This algorithm is slightly more complex than they previous two, but in essence
 
@@ -56,7 +72,7 @@ This algorithm is slightly more complex than they previous two, but in essence
 * *Issue:* Better than the previous two algorithms, but still very expensive for large graphs.
 
 
-## DOULION
+### DOULION
 
 DOULION is a sparsification algorithm, i.e. an algorithm that reduces the number of edges ($m$) in the input graph. The reason for this is because triangle counting is highly related $m$. This is a very useful method for the cases when our input graph
 
@@ -66,14 +82,16 @@ The idea behind this algorithm is that for each edge in the graph we toss a coin
 * *Issue:* Depending on the parameter *p* we set, the sparcified graph can be quite different from the original one.
 
 
-## TRIEST-Base
+### TRIEST-Base
 
 TRIEST-Base is an algorithm that gives an approximate triangle count for a stream of graph edges. It's main idea is that it creates and preserves a random sample (uniformly at random - through a technique called 'reservoir sampling') of the incoming edge stream, and counts the number of triangles within that random sample. For more details on the TRIEST-Base algorithm, please check [this](https://dl.acm.org/doi/10.1145/3059194) paper.
 
 
-# Key Findings
+## Key Findings
 
-## Brute Force magic
+Here we summarize some of the most interesting/intriguing results we found.
+
+### Brute Force magic
 
 Although it is clear (and also easily verified by some simple experiments) that the brute-force algorithm is the worst out of our basic algorithms, we found a case where it actually outperformed them!
 
@@ -86,7 +104,7 @@ better time performance compared to Brute Force. As the number of edges we keep 
 
 On the right graph, we can see the number of triangles found by DOULION + Brute Force, and we can see that it settles around the correct number of triangles approximately from keeping ~40% of the graph.
 
-## TRIEST-Base performance
+### TRIEST-Base performance
 
 In the following plot, we can see the accuracy of TRIEST-Base for a number of different graphs. On the y axis we have calculated the relative percentage error for the number of triangles in each graph.
 
